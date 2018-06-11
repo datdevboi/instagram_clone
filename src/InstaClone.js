@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Text, View, StyleSheet, Image, Dimensions, TouchableOpacity } from 'react-native'
 import config from './config';
-import {Post} from '../src/components/presentation'
+import {PostFeed} from '../src/components/container'
 export default class InstaClone extends Component {
     
 
@@ -13,7 +13,7 @@ export default class InstaClone extends Component {
         <View style={styles.tempNav}>
             <Text>Instagram</Text>
         </View>
-        <Post />
+        <PostFeed />
       </View>
     )
   }
