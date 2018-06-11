@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Text, View, StyleSheet, Image, Dimensions } from 'react-native'
-
+import config from './config';
 export default class InstaClone extends Component {
     state = {
         screenWidth:  Math.floor(Dimensions.get("window").width)
@@ -25,7 +25,7 @@ export default class InstaClone extends Component {
                 <Text>Amy</Text>
             </View>
             <View style={styles.options}>
-                <Text style={{fontSize: 30}}>...</Text>
+               <Image style={{height: 20, width: 20, tintColor: "black"}} source={config.images.menuIcon}/>
             </View>
         </View>
 
@@ -34,6 +34,11 @@ export default class InstaClone extends Component {
             style={{height: 425, width: this.state.screenWidth}} 
             source={{uri: imageUri}}
         />
+        <View style={styles.iconBar}>
+            <Image style={styles.icon} source={config.images.heartIcon}/>
+            <Image style={styles.icon} source={config.images.messageIcon}/>
+            <Image style={styles.icon} source={config.images.arrowIcon}/>
+        </View>
       </View>
     )
   }
@@ -49,7 +54,7 @@ const styles = StyleSheet.create({
     },
     tempNav: {
         width: 100 + "%",
-        height: 50,
+        height: 56,
         marginTop: 20,
         backgroundColor: "rgb(250,250,250)",
         borderBottomColor: "rgb(233,233,233)",
@@ -60,7 +65,7 @@ const styles = StyleSheet.create({
     },
     userBar: {
         width: 100 + "%",
-        height: 50,
+        height: config.styleConstants.rowHeight,
         backgroundColor: "rgb(255,255,255)",
         flexDirection: "row",
         justifyContent: "space-between",
@@ -85,5 +90,16 @@ const styles = StyleSheet.create({
         flexDirection: "column",
         
     
+    },
+    iconBar: {
+        height: config.styleConstants.rowHeight,
+        width: 100 + "%",
+        borderBottomWidth: StyleSheet.hairlineWidth,
+        borderBottomColor: "rgb(233,233,233)",
+        flexDirection: "row"
+
+    },
+    icon: {
+       paddingHorizontal: 5,
     }
 })
