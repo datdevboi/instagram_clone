@@ -37,6 +37,7 @@ export default class InstaClone extends Component {
             </View>
         </View>
         <TouchableOpacity
+            activeOpacity={0.8}
             onPress={this.handleLike}
             
         >
@@ -47,7 +48,7 @@ export default class InstaClone extends Component {
         />
         </TouchableOpacity>
         <View style={styles.iconBar}>
-            <Image style={[styles.icon, {height: 40, width: 40, tintColor: heartTint}]} source={config.images.heartIcon}/>
+            <Image  style={[styles.icon, {height: 40, width: 40, tintColor: heartTint}]} source={config.images.heartIcon}/>
             <Image style={[styles.icon, {height: 36, width: 36}]} source={config.images.messageIcon}/>
             <Image style={[styles.icon, {height: 40, width: 40}]} source={config.images.arrowIcon}/>
         </View>
