@@ -1,7 +1,17 @@
 import React, { Component } from 'react'
-import { Text, View, StyleSheet, Image } from 'react-native'
+import { Text, View, StyleSheet, Image, Dimensions } from 'react-native'
 
 export default class InstaClone extends Component {
+    state = {
+        screenWidth: 0
+    }
+
+  componentDidMount() {
+        this.setState({
+            screenWidth: Math.floor(Dimensions.get("window").width)
+        })    
+        
+  }  
   render() {
     return (
       <View style={styles.container}>
@@ -17,13 +27,13 @@ export default class InstaClone extends Component {
                 <Text>Amy</Text>
             </View>
             <View style={styles.options}>
-                <Text>Options</Text>
+                <Text style={{fontSize: 30}}>...</Text>
             </View>
         </View>
 
         <Image 
             
-            style={styles.image} 
+            style={{height: 100, width: this.state.screenWidth}} 
             source={{uri: "https://lh3.googleusercontent.com/vj5YsrWwmHZpUmgV5tz1YeWPYc8Dnrq_fAG-TCw4FziC-LBSLUZKXprRN4UnLyZBRWNg9_wd0fp0c8_Ne2KPo6SJVYA"}}
         />
       </View>
@@ -34,10 +44,6 @@ export default class InstaClone extends Component {
 
 
 const styles = StyleSheet.create({
-    image: {
-        width: 100 + "%",
-        height: 100
-    },
     container: {
         flex: 1,
         width: 100 + "%",
@@ -59,7 +65,8 @@ const styles = StyleSheet.create({
         height: 50,
         backgroundColor: "rgb(255,255,255)",
         flexDirection: "row",
-        justifyContent: "space-between"
+        justifyContent: "space-between",
+        alignItems: "center"
 
     },
     profilePic: {
@@ -75,6 +82,9 @@ const styles = StyleSheet.create({
     },
     options: {
         justifyContent: "center",
-        marginRight: 10
+        alignItems: "center",
+        marginRight: 10,
+        flexDirection: "column"
+    
     }
 })
