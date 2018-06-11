@@ -3,16 +3,13 @@ import { Text, View, StyleSheet, Image, Dimensions } from 'react-native'
 
 export default class InstaClone extends Component {
     state = {
-        screenWidth: 0
+        screenWidth:  Math.floor(Dimensions.get("window").width)
     }
 
-  componentDidMount() {
-        this.setState({
-            screenWidth: Math.floor(Dimensions.get("window").width)
-        })    
-        
-  }  
+  
   render() {
+    const imageUri = "https://lh3.googleusercontent.com/vj5YsrWwmHZpUmgV5tz1YeWPYc8Dnrq_fAG-TCw4FziC-LBSLUZKXprRN4UnLyZBRWNg9_wd0fp0c8_Ne2KPo6SJVYA" + "=s" + `${this.state.screenWidth}`
+
     return (
       <View style={styles.container}>
         <View style={styles.tempNav}>
@@ -33,8 +30,8 @@ export default class InstaClone extends Component {
 
         <Image 
             
-            style={{height: 100, width: this.state.screenWidth}} 
-            source={{uri: "https://lh3.googleusercontent.com/vj5YsrWwmHZpUmgV5tz1YeWPYc8Dnrq_fAG-TCw4FziC-LBSLUZKXprRN4UnLyZBRWNg9_wd0fp0c8_Ne2KPo6SJVYA"}}
+            style={{height: 425, width: this.state.screenWidth}} 
+            source={{uri: imageUri}}
         />
       </View>
     )
@@ -84,7 +81,8 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
         marginRight: 10,
-        flexDirection: "column"
+        flexDirection: "column",
+        
     
     }
 })
