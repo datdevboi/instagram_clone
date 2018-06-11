@@ -1,12 +1,19 @@
 import React, { Component } from 'react'
-import { Text, View } from 'react-native'
+import { Text, View, FlatList } from 'react-native'
 import {Post} from '../presentation';
 export class PostFeed extends Component {
+
+  renderPost = (post) => {
+    return <Post key={post}/>
+  }
   render() {
     return (
-      <View>
-       <Post/>
-      </View>
+      
+      <FlatList
+        data={[1,2,3,4,5,6,7,8]}
+        keyExtractor={(key) => key.toString()}
+        renderItem={this.renderPost}
+      />
     )
   }
 }
