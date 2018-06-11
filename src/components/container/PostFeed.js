@@ -4,7 +4,7 @@ import {Post} from '../presentation';
 export class PostFeed extends Component {
 
   renderPost = (post) => {
-    return <Post key={post}/>
+    return <Post />
   }
   render() {
     return (
