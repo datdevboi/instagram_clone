@@ -18,7 +18,7 @@ export default class Post extends Component {
   render() {
     const heartTint = this.state.photoLiked ?   'rgb(252,61,57)' : 'black'
     const imageHeight = Math.floor(this.state.screenWidth * 1.1) 
-    const imageUri = "https://lh3.googleusercontent.com/vj5YsrWwmHZpUmgV5tz1YeWPYc8Dnrq_fAG-TCw4FziC-LBSLUZKXprRN4UnLyZBRWNg9_wd0fp0c8_Ne2KPo6SJVYA" + "=s" + imageHeight + "-c"
+    const imageUri = this.props.imageSrc + "=s" + imageHeight + "-c"
 
     return (
       <View>
@@ -58,6 +58,10 @@ export default class Post extends Component {
       </View>
     )
   }
+}
+
+Post.defaultProps = {
+    imageSrc: "https://lh3.googleusercontent.com/vj5YsrWwmHZpUmgV5tz1YeWPYc8Dnrq_fAG-TCw4FziC-LBSLUZKXprRN4UnLyZBRWNg9_wd0fp0c8_Ne2KPo6SJVYA"
 }
 
 
