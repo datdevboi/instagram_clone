@@ -1,13 +1,21 @@
 import React, { Component } from 'react'
-import { Text, View, StyleSheet, Image, Dimensions } from 'react-native'
+import { Text, View, StyleSheet, Image, Dimensions, TouchableOpacity } from 'react-native'
 import config from './config';
 export default class InstaClone extends Component {
     state = {
-        screenWidth:  Math.floor(Dimensions.get("window").width)
+        screenWidth:  Math.floor(Dimensions.get("window").width),
+        photoLiked: false
+    }
+
+    handleLike = () => {
+        this.setState((prev) => ({
+            photoLiked: !prev.photoLiked
+        }))
     }
 
   
   render() {
+    const heartTint = this.state.photoLiked ?   'rgb(252,61,57)' : 'black'
     const imageHeight = Math.floor(this.state.screenWidth * 1.1) 
     const imageUri = "https://lh3.googleusercontent.com/vj5YsrWwmHZpUmgV5tz1YeWPYc8Dnrq_fAG-TCw4FziC-LBSLUZKXprRN4UnLyZBRWNg9_wd0fp0c8_Ne2KPo6SJVYA" + "=s" + imageHeight + "-c"
 
@@ -28,14 +36,18 @@ export default class InstaClone extends Component {
                <Image style={{height: 20, width: 20, tintColor: "black"}} source={config.images.menuIcon}/>
             </View>
         </View>
-
+        <TouchableOpacity
+            onPress={this.handleLike}
+            
+        >
         <Image 
             
             style={{height: 425, width: this.state.screenWidth}} 
             source={{uri: imageUri}}
         />
+        </TouchableOpacity>
         <View style={styles.iconBar}>
-            <Image style={[styles.icon, {height: 40, width: 40}]} source={config.images.heartIcon}/>
+            <Image style={[styles.icon, {height: 40, width: 40, tintColor: heartTint}]} source={config.images.heartIcon}/>
             <Image style={[styles.icon, {height: 36, width: 36}]} source={config.images.messageIcon}/>
             <Image style={[styles.icon, {height: 40, width: 40}]} source={config.images.arrowIcon}/>
         </View>
@@ -101,6 +113,6 @@ const styles = StyleSheet.create({
 
     },
     icon: {
-       paddingHorizontal: 5,
+       marginLeft: 10,
     }
 })
