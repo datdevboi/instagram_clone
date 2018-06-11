@@ -8,7 +8,8 @@ export default class InstaClone extends Component {
 
   
   render() {
-    const imageUri = "https://lh3.googleusercontent.com/vj5YsrWwmHZpUmgV5tz1YeWPYc8Dnrq_fAG-TCw4FziC-LBSLUZKXprRN4UnLyZBRWNg9_wd0fp0c8_Ne2KPo6SJVYA" + "=s" + `${this.state.screenWidth}`
+    const imageHeight = Math.floor(this.state.screenWidth * 1.1) 
+    const imageUri = "https://lh3.googleusercontent.com/vj5YsrWwmHZpUmgV5tz1YeWPYc8Dnrq_fAG-TCw4FziC-LBSLUZKXprRN4UnLyZBRWNg9_wd0fp0c8_Ne2KPo6SJVYA" + "=s" + imageHeight + "-c"
 
     return (
       <View style={styles.container}>
