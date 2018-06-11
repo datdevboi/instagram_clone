@@ -1,12 +1,15 @@
-const icons =  {
+const config =  {
     images: {
-        heart: require('../../assets/heart-outline-50.png'),
-        message: require("../../assets/speech-bubble-50.png"),
-        arrow: require("../../assets/forward-arrow-50.png"),
-        menu: require("../../assets/menu-vertical-48.png")
+        heartIcon: require('../../assets/heart-outline-50.png'),
+        messageIcon: require("../../assets/speech-bubble-50.png"),
+        arrowIcon: require("../../assets/forward-arrow-50.png"),
+        menuIcon: require("../../assets/menu-vertical-48.png")
+    },
+    styleConstants: {
+        rowHeight: 50
     }
 }
 
 
 
-export default icons;
+export default config;
