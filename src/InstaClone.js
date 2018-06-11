@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Text, View, StyleSheet, Image, Dimensions, TouchableOpacity } from 'react-native'
 import {MainFeed, Login, Camera, Profile} from './components/screens'
-import {createStackNavigator, createBottomTabNavigator} from 'react-navigation';
+import {createStackNavigator, createBottomTabNavigator, createSwitchNavigator} from 'react-navigation';
 
 
 const Tabs = createBottomTabNavigator({
@@ -10,7 +10,7 @@ const Tabs = createBottomTabNavigator({
   profile: Profile
 })
 
-const MainStack = createStackNavigator({
+const MainStack = createSwitchNavigator({
   login: {
     screen: Login
   },
