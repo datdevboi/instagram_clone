@@ -4,7 +4,7 @@ import { Text, View, StyleSheet, TouchableOpacity } from 'react-native'
 export default class Login extends Component {
 
   login = () => {
-      alert("loged in")
+    this.props.navigation.navigate("main")
   }  
   render() {
     return (
