@@ -1,12 +1,18 @@
 import React, { Component } from 'react'
-import { Text, View, StyleSheet } from 'react-native'
+import { Text, View, StyleSheet, TouchableOpacity } from 'react-native'
 
 export default class Login extends Component {
+
+  login = () => {
+      alert("loged in")
+  }  
   render() {
     return (
-      <View style={styles.loginContainer}>
-        <Text> Login Page </Text>
-      </View>
+      <TouchableOpacity 
+        onPress={this.login}
+        style={styles.loginContainer}>
+         <Text> Login Page </Text>
+      </TouchableOpacity>
     )
   }
 }
