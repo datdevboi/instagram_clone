@@ -35,9 +35,9 @@ export default class InstaClone extends Component {
             source={{uri: imageUri}}
         />
         <View style={styles.iconBar}>
-            <Image style={styles.icon} source={config.images.heartIcon}/>
-            <Image style={styles.icon} source={config.images.messageIcon}/>
-            <Image style={styles.icon} source={config.images.arrowIcon}/>
+            <Image style={[styles.icon, {height: 40, width: 40}]} source={config.images.heartIcon}/>
+            <Image style={[styles.icon, {height: 36, width: 36}]} source={config.images.messageIcon}/>
+            <Image style={[styles.icon, {height: 40, width: 40}]} source={config.images.arrowIcon}/>
         </View>
       </View>
     )
@@ -96,7 +96,8 @@ const styles = StyleSheet.create({
         width: 100 + "%",
         borderBottomWidth: StyleSheet.hairlineWidth,
         borderBottomColor: "rgb(233,233,233)",
-        flexDirection: "row"
+        flexDirection: "row",
+        alignItems: 'center',
 
     },
     icon: {
