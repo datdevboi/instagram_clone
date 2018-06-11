@@ -63,13 +63,15 @@ const styles = StyleSheet.create({
 
     },
     profilePic: {
-        borderRadius: 50,
-        height: 50,
-        width: 50
+        borderRadius: 20,
+        height: 40,
+        width: 40,
+        marginRight: 10
     },
     userInfo: {
         flexDirection: "row", 
-        alignItems: "center"
+        alignItems: "center",
+        justifyContent: "space-between"
     },
     options: {
         justifyContent: "center",
