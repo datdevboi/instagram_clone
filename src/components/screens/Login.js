@@ -4,15 +4,17 @@ import { Text, View, StyleSheet, TouchableOpacity } from 'react-native'
 export default class Login extends Component {
 
   login = () => {
-    this.props.navigation.navigate("main")
+    this.props.navigation.navigate("signup")
   }  
   render() {
     return (
+      <View style={styles.loginContainer}>
       <TouchableOpacity 
         onPress={this.login}
-        style={styles.loginContainer}>
+        >
          <Text> Login Page </Text>
       </TouchableOpacity>
+      </View>
     )
   }
 }

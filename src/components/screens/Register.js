@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Text, View, StyleSheet, TouchableOpacity } from 'react-native'
 
-export default class Login extends Component {
+export default class Register extends Component {
 
   login = () => {
     this.props.navigation.navigate("main")
@@ -12,7 +12,7 @@ export default class Login extends Component {
       <TouchableOpacity 
         onPress={this.login}
         >
-         <Text> Sign Up </Text>
+         <Text> Register </Text>
       </TouchableOpacity>
       </View>
     )
