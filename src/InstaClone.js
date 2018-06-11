@@ -8,6 +8,18 @@ export default class InstaClone extends Component {
         <View style={styles.tempNav}>
             <Text>Instagram</Text>
         </View>
+        <View style={styles.userBar}>
+            <View style={styles.userInfo}>
+                <Image 
+                    style={styles.profilePic}
+                    source={{uri: "https://lh3.googleusercontent.com/XjPWx8hu_LuIyMXWg_kp5SnsZBT5Nz9WwjBgj_ck-tZIKk_aiNab_HD3FbAa6U71qpxojTOXTAZ_Cn9c1Y1HZ0JTOLE"}}
+                />
+                <Text>Amy</Text>
+            </View>
+            <View style={styles.options}>
+                <Text>Options</Text>
+            </View>
+        </View>
 
         <Image 
             
@@ -41,5 +53,26 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
 
+    },
+    userBar: {
+        width: 100 + "%",
+        height: 50,
+        backgroundColor: "rgb(255,255,255)",
+        flexDirection: "row",
+        justifyContent: "space-between"
+
+    },
+    profilePic: {
+        borderRadius: 50,
+        height: 50,
+        width: 50
+    },
+    userInfo: {
+        flexDirection: "row", 
+        alignItems: "center"
+    },
+    options: {
+        justifyContent: "center",
+        marginRight: 10
     }
 })
