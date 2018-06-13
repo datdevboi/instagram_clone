@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Text, View, StyleSheet, TouchableOpacity, TextInput, Button } from 'react-native'
-
+import config from '../../config';
 
 export default class Register extends Component {
   state = {
@@ -9,7 +9,20 @@ export default class Register extends Component {
   }
 
   register = () => {
-    // this.props.navigation.navigate("main")
+    
+    fetch(config.baseUrl + '/api/signup', {
+  method: 'POST',
+  headers: {
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({
+    email: this.state.email,
+    password: this.state.password,
+  }),
+}).then(data => {
+  alert(JSON.stringify(data));
+}).catch(err => alert(err));
   }  
 
   updateText = (fieldName, newText) => {
