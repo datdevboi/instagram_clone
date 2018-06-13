@@ -20,9 +20,18 @@ export default class Register extends Component {
     email: this.state.email,
     password: this.state.password,
   }),
-}).then(data => {
-  alert(JSON.stringify(data));
-}).catch(err => alert(err));
+})
+  .then(data => data.json())
+  .then(jsondata => {
+    if(jsondata.confirmation === "success") {
+      this.props.navigation.navigate("main")
+    } else {
+      throw new Error({message: "Sorry something went wrong with register"})
+    }
+  })
+  .catch(err => {
+    console.log(err.message);
+  })
   }  
 
   updateText = (fieldName, newText) => {
