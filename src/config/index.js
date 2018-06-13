@@ -7,7 +7,8 @@ const config =  {
     },
     styleConstants: {
         rowHeight: 50
-    }
+    },
+    baseUrl: 'http://instagram_clone-h9somf.turbo360-vertex.com/'
 }
 
 
