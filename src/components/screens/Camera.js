@@ -1,17 +1,35 @@
 import React from 'react';
-import { Text, View, TouchableOpacity } from 'react-native';
+import { Text, View, TouchableOpacity, StyleSheet } from 'react-native';
 import { Camera, Permissions } from 'expo';
 
-export default class CameraExample extends React.Component {
-  state = {
-    hasCameraPermission: null,
-    type: Camera.Constants.Type.back,
-  };
+export default class myCamera extends React.Component {
+  constructor(props) {
+    super(props);
+    this.camera = React.createRef();
+
+    this.state = {
+      hasCameraPermission: null,
+      type: Camera.Constants.Type.back,
+    };
+  }
+  
 
   async componentWillMount() {
     const { status } = await Permissions.askAsync(Permissions.CAMERA);
     this.setState({ hasCameraPermission: status === 'granted' });
   }
+
+  takePicture = () => {
+    if(this.camera){
+      this.camera.takePictureAsync({ onPictureSaved: this.onPictureSaved });
+    }
+  }
+
+  onPictureSaved = async(photo) => {
+
+  }
+
+
 
   render() {
     const { hasCameraPermission } = this.state;
@@ -22,7 +40,11 @@ export default class CameraExample extends React.Component {
     } else {
       return (
         <View style={{ flex: 1 }}>
-          <Camera style={{ flex: 1 }} type={this.state.type}>
+          <Camera 
+          style={{ flex: 1 }} 
+          type={this.state.type}
+          ref={this.camera}
+          >
             <View
               style={{
                 flex: 1,
@@ -43,9 +65,16 @@ export default class CameraExample extends React.Component {
                   });
                 }}>
                 <Text
-                  style={{ fontSize: 18, marginBottom: 10, color: 'white' }}>
+                  style={styles.cameraControlls}>
                   {' '}Flip{' '}
                 </Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={{
+                  flex: 1,
+                  alignSelf: 'flex-end',
+                  alignItems: 'center',
+                }}>
+                <Text style={styles.cameraControlls}>Take a picture</Text>
               </TouchableOpacity>
             </View>
           </Camera>
@@ -54,3 +83,13 @@ export default class CameraExample extends React.Component {
     }
   }
 }
+
+
+const styles = StyleSheet.create({
+  cameraControlls: {
+    fontSize: 18, 
+    marginBottom: 10, 
+    color: 'white'
+
+  }
+})
