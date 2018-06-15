@@ -24,14 +24,16 @@ export default class Login extends Component {
 })
   .then(data => data.json())
   .then(jsondata => {
+    alert(jsondata.confirmation);
     if(jsondata.confirmation === "success") {
       this.props.navigation.navigate("main")
     } else {
-      throw new Error({message: "Sorry something went wrong with register"})
+      throw new Error(jsondata.message)
     }
   })
   .catch(err => {
-    console.log(err.message);
+
+    alert("User not found");
   })
   }  
 
@@ -41,9 +43,7 @@ export default class Login extends Component {
     })
   }
 
-  toRegister = () => {
-    this.props.navigation.navigate("register");
-  }
+  
   render() {
     return (
       <View style={styles.registerContainer}>
@@ -66,7 +66,7 @@ export default class Login extends Component {
           style={styles.input} secureTextEntry placeholder="password" value={this.state.password}/>
         <Button onPress={this.login} title="login"/>
 
-        <Button title="Register" onPress={this.toRegister}/>
+        <Button title="No account? Register here" onPress={this.login}/>
         
 
       
