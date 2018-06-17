@@ -1,6 +1,7 @@
 import React from 'react';
 import { Text, View, TouchableOpacity, StyleSheet } from 'react-native';
 import { Camera, Permissions } from 'expo';
+import config from '../../config';
 
 export default class myCamera extends React.Component {
   constructor(props) {
@@ -19,15 +20,46 @@ export default class myCamera extends React.Component {
     this.setState({ hasCameraPermission: status === 'granted' });
   }
 
-  takePicture = () => {
+
+  componentDidMount(){
+    const { navigation } = this.props;
+    const userId = navigation.getParam('userId', 'NO-ID');
+    
+    
+  }
+
+  takePicture = async () => {
     if(this.camera){
-      this.camera.takePictureAsync({ onPictureSaved: this.onPictureSaved });
+      const photo =  await this.camera.takePictureAsync({base64: true});
+      
+      alert(photo);
     }
   }
 
-  onPictureSaved = async(photo) => {
+  onPictureSaved = (photo) => {
+    const { navigation } = this.props;
+    const userId = navigation.getParam('userId', 'NO-ID');
+    
+    alert(photo);
 
-  }
+  //   fetch(config.devUrl + `/users/${userId}/photo`, {
+  //     method: 'POST',
+  //     headers: {
+  //       Accept: 'application/json',
+  //       'Content-Type': 'application/json',
+  //     },
+  //     body: JSON.stringify({
+  //      photo
+  //     })
+      
+  // }).then(data => data.json())
+  // .then(jsonData => null)
+  // .catch((err) => {
+
+  // });
+
+
+}
 
 
 
@@ -43,7 +75,7 @@ export default class myCamera extends React.Component {
           <Camera 
           style={{ flex: 1 }} 
           type={this.state.type}
-          ref={this.camera}
+          ref={ref => this.camera = ref}
           >
             <View
               style={{
@@ -74,7 +106,7 @@ export default class myCamera extends React.Component {
                   alignSelf: 'flex-end',
                   alignItems: 'center',
                 }}>
-                <Text style={styles.cameraControlls}>Take a picture</Text>
+                <Text onPress={this.takePicture} style={styles.cameraControlls}>Take a picture</Text>
               </TouchableOpacity>
             </View>
           </Camera>
