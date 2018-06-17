@@ -26,15 +26,32 @@ const MainStack = createSwitchNavigator({
 }, {
   initialRouteName: 'intro'
 })
-export default class InstaClone extends Component {
-    
 
-  
+const {Consumer, Provider} = React.createContext({
+  userId: '',
+  updateUserId: () => {
+
+  }
+})
+
+export {Consumer};
+export default class InstaClone extends Component {
+    state = {
+      userId: '',
+      changeId: this.changeId
+    }
+
+  changeId = (id) => {
+    this.setState({
+      userId: id
+    })
+  }
   render() {
    
     return (
-      
-        <MainStack/>
+        <Provider value={this.state}>
+          <MainStack/>
+        </Provider>
       
     )
   }
