@@ -1,61 +1,55 @@
-import React, { Component } from 'react'
-import { Text, View, StyleSheet, Image, Dimensions, TouchableOpacity } from 'react-native'
-import {MainFeed, Login, Camera, Profile, Register} from './components/screens'
-import {createStackNavigator, createBottomTabNavigator, createSwitchNavigator} from 'react-navigation';
+import React, { Component } from 'react';
+import {
+  Text,
+  View,
+  StyleSheet,
+  Image,
+  Dimensions,
+  TouchableOpacity,
+} from 'react-native';
+import {
+  MainFeed,
+  Login,
+  Camera,
+  Profile,
+  Register,
+} from './components/screens';
+import { MainContext } from './MainContext';
 
+import {
+  createStackNavigator,
+  createBottomTabNavigator,
+  createSwitchNavigator,
+} from 'react-navigation';
 
 const Tabs = createBottomTabNavigator({
   feed: MainFeed,
   camera: Camera,
-  profile: Profile
-})
+  profile: Profile,
+});
 
 const IntroStack = createStackNavigator({
   login: Login,
-  register: Register
-  
-})
+  register: Register,
+});
 
-const MainStack = createSwitchNavigator({
-  intro: {
-    screen: IntroStack
+const MainStack = createSwitchNavigator(
+  {
+    intro: IntroStack,
+
+    main: Tabs,
   },
-  main: {
-    screen: Tabs
+  {
+    initialRouteName: 'intro',
   }
-}, {
-  initialRouteName: 'intro'
-})
+);
 
-const {Consumer, Provider} = React.createContext({
-  userId: '',
-  updateUserId: () => {
-
-  }
-})
-
-export {Consumer};
 export default class InstaClone extends Component {
-    state = {
-      userId: '',
-      changeId: this.changeId
-    }
-
-  changeId = (id) => {
-    this.setState({
-      userId: id
-    })
-  }
   render() {
-   
     return (
-        <Provider value={this.state}>
-          <MainStack/>
-        </Provider>
-      
-    )
+      <MainContext>
+        <MainStack />
+      </MainContext>
+    );
   }
 }
-
-
-
