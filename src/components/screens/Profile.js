@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import {  View, Text, } from 'react-native';
+import { View, Text } from 'react-native';
+import withContext from '../../withContext';
 
-export default class Profile extends Component {
+class P extends Component {
   render() {
     return (
       <View>
@@ -10,3 +11,7 @@ export default class Profile extends Component {
     );
   }
 }
+
+const Profile = withContext(P);
+
+export default Profile;

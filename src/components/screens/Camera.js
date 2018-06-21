@@ -2,8 +2,9 @@ import React from 'react';
 import { Text, View, TouchableOpacity, StyleSheet } from 'react-native';
 import { Camera, Permissions } from 'expo';
 import config from '../../config';
+import withContext from '../../withContext';
 
-export default class myCamera extends React.Component {
+class MyC extends React.Component {
   constructor(props) {
     super(props);
     this.camera = React.createRef();
@@ -13,70 +14,67 @@ export default class myCamera extends React.Component {
       type: Camera.Constants.Type.back,
     };
   }
-  
 
-  async componentWillMount() {
+  async componentDidMount() {
     const { status } = await Permissions.askAsync(Permissions.CAMERA);
-    this.setState({ hasCameraPermission: status === 'granted' });
-  }
-
-
-  componentDidMount(){
-    const { navigation } = this.props;
-    const userId = navigation.getParam('userId', 'NO-ID');
-    
-    
+    this.setState({
+      hasCameraPermission: status === 'granted',
+    });
   }
 
   takePicture = async () => {
-    if(this.camera){
-      const photo =  await this.camera.takePictureAsync({base64: true});
-      
-      alert(photo);
-    }
-  }
+    if (this.camera) {
+      const { navigation } = this.props;
+      const userId = navigation.getParam('userId', 'NO-ID');
 
-  onPictureSaved = (photo) => {
+      const photo = await this.camera.takePictureAsync({
+        base64: true,
+      });
+
+      const response = await fetch(
+        config.baseUrl + `api/users/${userId}/photo`,
+        {
+          method: 'POST',
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            photo,
+          }),
+        }
+      )
+        .then(response => response.json())
+        .then(data => alert(data.confirmation))
+        .catch(err => console.log(err));
+    }
+  };
+
+  onPictureSaved = photo => {
     const { navigation } = this.props;
     const userId = navigation.getParam('userId', 'NO-ID');
-    
+
     alert(photo);
-
-  //   fetch(config.devUrl + `/users/${userId}/photo`, {
-  //     method: 'POST',
-  //     headers: {
-  //       Accept: 'application/json',
-  //       'Content-Type': 'application/json',
-  //     },
-  //     body: JSON.stringify({
-  //      photo
-  //     })
-      
-  // }).then(data => data.json())
-  // .then(jsonData => null)
-  // .catch((err) => {
-
-  // });
-
-
-}
-
-
+  };
 
   render() {
     const { hasCameraPermission } = this.state;
     if (hasCameraPermission === null) {
       return <View />;
     } else if (hasCameraPermission === false) {
-      return <Text>No access to camera</Text>;
+      return <Text> No access to camera </Text>;
     } else {
       return (
-        <View style={{ flex: 1 }}>
-          <Camera 
-          style={{ flex: 1 }} 
-          type={this.state.type}
-          ref={ref => this.camera = ref}
-          >
+        <View
+          style={{
+            flex: 1,
+          }}>
+          <Camera
+            style={{
+              flex: 1,
+            }}
+            type={this.state.type}
+            ref={ref => (this.camera = ref)}>
             <View
               style={{
                 flex: 1,
@@ -91,37 +89,41 @@ export default class myCamera extends React.Component {
                 }}
                 onPress={() => {
                   this.setState({
-                    type: this.state.type === Camera.Constants.Type.back
-                      ? Camera.Constants.Type.front
-                      : Camera.Constants.Type.back,
+                    type:
+                      this.state.type === Camera.Constants.Type.back
+                        ? Camera.Constants.Type.front
+                        : Camera.Constants.Type.back,
                   });
                 }}>
-                <Text
-                  style={styles.cameraControlls}>
-                  {' '}Flip{' '}
-                </Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={{
+                <Text style={styles.cameraControlls}> Flip </Text>{' '}
+              </TouchableOpacity>{' '}
+              <TouchableOpacity
+                style={{
                   flex: 1,
                   alignSelf: 'flex-end',
                   alignItems: 'center',
                 }}>
-                <Text onPress={this.takePicture} style={styles.cameraControlls}>Take a picture</Text>
-              </TouchableOpacity>
-            </View>
-          </Camera>
+                <Text onPress={this.takePicture} style={styles.cameraControlls}>
+                  {' '}
+                  Take a picture{' '}
+                </Text>{' '}
+              </TouchableOpacity>{' '}
+            </View>{' '}
+          </Camera>{' '}
         </View>
       );
     }
   }
 }
 
+const MyCamera = withContext(MyC);
+
+export default MyCamera;
 
 const styles = StyleSheet.create({
   cameraControlls: {
-    fontSize: 18, 
-    marginBottom: 10, 
-    color: 'white'
-
-  }
-})
+    fontSize: 18,
+    marginBottom: 10,
+    color: 'white',
+  },
+});
