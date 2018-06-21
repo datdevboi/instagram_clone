@@ -9,7 +9,7 @@ const config = {
     rowHeight: 50,
   },
   baseUrl: 'http://instagram_clone-h9somf.turbo360-vertex.com/',
-  devUrl: 'http://localhost:3000/api',
+  devUrl: 'http://localhost:3000/',
 };
 
 export default config;
