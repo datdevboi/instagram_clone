@@ -3,6 +3,7 @@ import { Text, View, TouchableOpacity, StyleSheet } from 'react-native';
 import { Camera, Permissions } from 'expo';
 import config from '../../config';
 import withContext from '../../withContext';
+import Turbo from 'turbo360';
 
 class MyC extends React.Component {
   constructor(props) {
@@ -11,7 +12,7 @@ class MyC extends React.Component {
 
     this.state = {
       hasCameraPermission: null,
-      type: Camera.Constants.Type.back,
+      type: Camera.Constants.Type.front,
     };
   }
 
@@ -24,37 +25,33 @@ class MyC extends React.Component {
 
   takePicture = async () => {
     if (this.camera) {
-      const { navigation } = this.props;
-      const userId = navigation.getParam('userId', 'NO-ID');
-
       const photo = await this.camera.takePictureAsync({
+        quality: 0.5,
         base64: true,
       });
 
-      const response = await fetch(
-        config.baseUrl + `api/users/${userId}/photo`,
-        {
-          method: 'POST',
-          headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            photo,
-          }),
-        }
-      )
+      const turbo = Turbo({ site_id: '5b1d9c0fc9611100148e9daa' });
+
+      const cdnResponse = await turbo.uploadFile({
+        type: 'image/jpeg',
+        name: 'photo',
+        uri: photo.uri,
+      });
+
+      fetch(config.baseUrl + `/api/users/${this.props.context.userId}/photo`, {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          imageUrl: cdnResponse.result.url,
+        }),
+      })
         .then(response => response.json())
-        .then(data => alert(data.confirmation))
-        .catch(err => console.log(err));
+        .then(data => alert(JSON.stringify(data)))
+        .catch(err => alert(err));
     }
-  };
-
-  onPictureSaved = photo => {
-    const { navigation } = this.props;
-    const userId = navigation.getParam('userId', 'NO-ID');
-
-    alert(photo);
   };
 
   render() {
