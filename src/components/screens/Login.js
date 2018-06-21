@@ -5,12 +5,12 @@ import withContext from '../../withContext';
 
 class Login extends Component {
   state = {
-    email: 'test@test.com',
+    email: 'test@test.com', 
     password: 'test',
   };
 
   login = async () => {
-    await fetch(config.baseUrl + '/api/login', {
+    fetch(config.baseUrl + '/api/login', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
