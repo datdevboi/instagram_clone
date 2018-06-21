@@ -4,10 +4,4 @@ import Camera from './Camera';
 import Profile from './Profile';
 import Register from './Register';
 
-export {
-    MainFeed,
-    Login,
-    Camera,
-    Profile,
-    Register
-}
+export { MainFeed, Login, Camera, Profile, Register };
