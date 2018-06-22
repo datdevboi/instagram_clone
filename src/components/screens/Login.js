@@ -1,11 +1,21 @@
 import React, { Component } from 'react';
-import { Text, View, StyleSheet, TextInput, Button } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import config from '../../config';
 import withContext from '../../withContext';
+import {
+  Button,
+  Text,
+  Container,
+  Title,
+  Form,
+  Input,
+  Item,
+  Icon,
+} from 'native-base';
 
 class Login extends Component {
   state = {
-    email: 'test@test.com', 
+    email: 'test@test.com',
     password: 'test',
   };
 
@@ -48,32 +58,56 @@ class Login extends Component {
 
   render() {
     return (
-      <View style={styles.registerContainer}>
-        <Text>Login Page</Text>
+      <Container style={{ backgroundColor: 'white', justifyContent: 'center' }}>
+        <Title style={{ padding: 20 }}>Login Page</Title>
 
-        <TextInput
-          autoCorrect={false}
-          onChangeText={text => {
-            this.updateText('email', text);
-          }}
-          style={styles.input}
-          placeholder="email"
-          value={this.state.email}
-        />
-        <TextInput
-          autoCorrect={false}
-          onChangeText={text => {
-            this.updateText('password', text);
-          }}
-          style={styles.input}
-          secureTextEntry
-          placeholder="password"
-          value={this.state.password}
-        />
-        <Button onPress={this.login} title="login" />
+        <Form>
+          <Item regular>
+            <Icon type="FontAwesome" name="envelope" />
+            <Input
+              autoCorrect={false}
+              onChangeText={text => {
+                this.updateText('email', text);
+              }}
+              // style={styles.input}
+              placeholder="email"
+              value={this.state.email}
+            />
+          </Item>
+          <Item>
+            <Icon type="FontAwesome" name="key" />
+            <Input
+              autoCorrect={false}
+              onChangeText={text => {
+                this.updateText('password', text);
+              }}
+              secureTextEntry
+              placeholder="password"
+              value={this.state.password}
+            />
+          </Item>
 
-        <Button title="No account? Register here" onPress={this.toRegister} />
-      </View>
+          <View
+            style={{
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+            }}>
+            <Button
+              onPress={this.login}
+              primary
+              bordered
+              full
+              style={{ marginVertical: 10 }}>
+              <Text>Login</Text>
+            </Button>
+
+            <Button onPress={this.toRegister} info bordered full>
+              <Text>No account? Register here</Text>
+            </Button>
+          </View>
+        </Form>
+      </Container>
     );
   }
 }
@@ -87,7 +121,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'rgb(252,61,57)',
+    backgroundColor: 'rgb(220,220,220)',
   },
   input: {
     height: 50,
