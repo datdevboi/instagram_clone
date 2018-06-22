@@ -113,25 +113,3 @@ class Login extends Component {
 }
 
 export default withContext(Login);
-
-const styles = StyleSheet.create({
-  registerContainer: {
-    height: 100 + '%',
-    width: 100 + '%',
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'rgb(220,220,220)',
-  },
-  input: {
-    height: 50,
-    width: 100 + '%',
-    backgroundColor: 'white',
-    marginBottom: 10,
-  },
-  form: {
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'flex-start',
-  },
-});
