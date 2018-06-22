@@ -1,7 +1,17 @@
 import React, { Component } from 'react';
-import { Text, View, StyleSheet, TextInput, Button } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import config from '../../config';
 import withContext from '../../withContext';
+import {
+  Button,
+  Text,
+  Container,
+  Title,
+  Form,
+  Input,
+  Item,
+  Icon,
+} from 'native-base';
 
 class R extends Component {
   state = {
@@ -44,30 +54,44 @@ class R extends Component {
   };
   render() {
     return (
-      <View style={styles.registerContainer}>
-        <Text>Register Page</Text>
+      <Container style={{ backgroundColor: 'white', justifyContent: 'center' }}>
+        <Title style={{ padding: 20 }}>Register Page</Title>
 
-        <TextInput
-          autoCorrect={false}
-          onChangeText={text => {
-            this.updateText('email', text);
-          }}
-          style={styles.input}
-          placeholder="email"
-          value={this.state.email}
-        />
-        <TextInput
-          autoCorrect={false}
-          onChangeText={text => {
-            this.updateText('password', text);
-          }}
-          style={styles.input}
-          secureTextEntry
-          placeholder="password"
-          value={this.state.password}
-        />
-        <Button onPress={this.register} title="register" />
-      </View>
+        <Form>
+          <Item regular>
+            <Icon type="FontAwesome" name="envelope" />
+            <Input
+              autoCorrect={false}
+              onChangeText={text => {
+                this.updateText('email', text);
+              }}
+              placeholder="email"
+              value={this.state.email}
+            />
+          </Item>
+          <Item>
+            <Icon type="FontAwesome" name="key" />
+            <Input
+              autoCorrect={false}
+              onChangeText={text => {
+                this.updateText('password', text);
+              }}
+              secureTextEntry
+              placeholder="password"
+              value={this.state.password}
+            />
+          </Item>
+
+          <Button
+            onPress={this.register}
+            primary
+            bordered
+            full
+            style={{ marginVertical: 10 }}>
+            <Text>Register</Text>
+          </Button>
+        </Form>
+      </Container>
     );
   }
 }
@@ -75,25 +99,3 @@ class R extends Component {
 const Register = withContext(R);
 
 export default Register;
-
-const styles = StyleSheet.create({
-  registerContainer: {
-    height: 100 + '%',
-    width: 100 + '%',
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'rgb(252,61,57)',
-  },
-  input: {
-    height: 50,
-    width: 100 + '%',
-    backgroundColor: 'white',
-    marginBottom: 10,
-  },
-  form: {
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'flex-start',
-  },
-});
