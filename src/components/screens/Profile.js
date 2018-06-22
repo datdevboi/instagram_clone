@@ -18,17 +18,15 @@ class P extends Component {
       },
     })
       .then(response => response.json())
-      .then(data =>
-        this.setState({
-          profilePics: data.data,
-        })
-      )
+      .then(data => {
+        this.props.context.updatePhotos(data.data);
+      })
       .catch(err => alert(err));
   }
   render() {
     return (
       <View style={styles.container}>
-        {this.state.profilePics.map((pic, i) => {
+        {this.props.context.profilePics.map((pic, i) => {
           return (
             <Image
               style={styles.profilePic}
