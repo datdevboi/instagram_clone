@@ -38,6 +38,8 @@ class MyC extends React.Component {
         uri: photo.uri,
       });
 
+      this.props.context.newPhoto(cdnResponse.result);
+
       fetch(config.baseUrl + `/api/users/${this.props.context.userId}/photo`, {
         method: 'POST',
         headers: {
@@ -49,7 +51,7 @@ class MyC extends React.Component {
         }),
       })
         .then(response => response.json())
-        .then(data => alert(JSON.stringify(data)))
+        .then(data => console.log(data))
         .catch(err => alert(err));
     }
   };
