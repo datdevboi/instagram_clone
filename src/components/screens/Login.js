@@ -15,8 +15,8 @@ import {
 
 class Login extends Component {
   state = {
-    email: 'test@test.com',
-    password: 'test',
+    email: '',
+    password: '',
   };
 
   login = async () => {
